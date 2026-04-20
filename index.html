@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zenith Roofing – Insurance Roof Inspection Report</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #e8e8e8; }
+@media print {
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  textarea, input[type=text] { border: none !important; background: transparent !important; resize: none !important; }
+  .page { box-shadow: none; margin: 0 !important; }
+  .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sec-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .col-head { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .photo-box { border: 1px solid #ccc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section-block { page-break-inside: avoid; }
+  .photos-page { page-break-before: always; }
+}
+.no-print { background: #1a2a4a; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 100; }
+.btn-print { display: inline-block; margin: 0 6px; padding: 8px 24px; border-radius: 5px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; background: #ff8c00; color: #fff; }
+.btn-print:hover { background: #e07800; }
+
+/* Sticky header that repeats on every print page */
+.page { width: 210mm; background: #fff; margin: 0 auto 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.2); }
+
+.header { background: #1a2a4a; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; gap: 10px; }
+.header-left { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 150px; }
+.logo-box { width: 78px; height: 58px; background: #2a3f6a; border: 2px dashed #4a6aaa; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 8px; color: #7090cc; text-align: center; cursor: pointer; position: relative; overflow: hidden; }
+.logo-box img { width: 100%; height: 100%; object-fit: contain; position: absolute; top:0; left:0; }
+.co-name { color: #fff; font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+.co-sub { color: #ff8c00; font-size: 7px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.header-center { flex: 1; text-align: center; }
+.rpt-title { color: #ff8c00; font-size: 12px; font-weight: 700; text-transform: uppercase; line-height: 1.4; }
+.header-right { text-align: right; min-width: 175px; }
+.header-right p { color: #ccd6f6; font-size: 8px; line-height: 1.8; }
+
+.body-content { padding: 0 0 8px; }
+.sec { padding: 0 16px 8px; }
+.sec-title { background: #1a2a4a; color: #fff; font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 12px; margin: 8px 16px 6px; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 14px; }
+.field { display: flex; flex-direction: column; gap: 1px; }
+.field label { font-size: 7px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+.field input[type=text] { border: none; border-bottom: 1px solid #ccc; font-size: 9px; padding: 2px 0; color: #1a2a4a; background: transparent; outline: none; width: 100%; }
+.field input[type=text]:focus { border-bottom-color: #ff8c00; }
+textarea.box { width: 100%; border: 1px solid #ccc; border-radius: 3px; font-size: 9px; padding: 5px 7px; color: #1a2a4a; background: #fafafa; resize: vertical; outline: none; font-family: Arial, sans-serif; min-height: 60px; }
+textarea.box:focus { border-color: #ff8c00; background: #fff; }
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 0 16px; }
+.col-head { color: #fff; font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; margin-bottom: 4px; background: #1a2a4a; }
+.photos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 10px 16px 14px; }
+.photo-box { aspect-ratio: 4/3; border: 1.5px dashed #ccc; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 10px; color: #bbb; cursor: pointer; overflow: hidden; position: relative; background: #f9f9f9; }
+.photo-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; }
+.photo-icon { font-size: 26px; color: #ddd; margin-bottom: 4px; }
+.section-block { page-break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<div class="no-print">
+  <button class="btn-print" onclick="window.print()">Print / Save as PDF</button>
+</div>
+
+<!-- MAIN REPORT PAGE -->
+<div class="page">
+  <div class="header" id="mainHeader">
+    <div class="header-left">
+      <div class="logo-box" onclick="document.getElementById('logoInput').click()" title="Click to upload logo">
+        <span id="logoText">Upload logo</span>
+        <img id="logoImg" src="" style="display:none;" />
+      </div>
+      <input type="file" id="logoInput" accept="image/*" style="display:none;" onchange="loadLogo(event)" />
+      <div class="co-name">ZENITH ROOFING</div>
+      <div class="co-sub">Roof Restoration and Replacements</div>
+    </div>
+    <div class="header-center">
+      <div class="rpt-title">Insurance Roof<br>Inspection Report</div>
+    </div>
+    <div class="header-right">
+      <p><strong style="color:#fff;">ABN:</strong> 26 671 651 915</p>
+      <p><strong style="color:#fff;">Email:</strong> info@zenithroofingsydney.com.au</p>
+      <p><strong style="color:#fff;">Phone:</strong> (02) 7256 4796</p>
+    </div>
+  </div>
+
+  <div class="body-content">
+
+    <div class="section-block">
+      <div class="sec-title">Property and Inspection Details</div>
+      <div class="sec">
+        <div class="fields">
+          <div class="field"><label>Client Name</label><input type="text" placeholder="Full name" /></div>
+          <div class="field"><label>Work Order #</label><input type="text" placeholder="WO-000000" /></div>
+          <div class="field"><label>Address</label><input type="text" placeholder="Street address" /></div>
+          <div class="field"><label>Roof Type</label><input type="text" placeholder="e.g. Colorbond, Tile, Metal" /></div>
+          <div class="field"><label>Date of Inspection</label><input type="text" placeholder="DD / MM / YYYY" /></div>
+          <div class="field"><label>Roof Age</label><input type="text" placeholder="e.g. 15 years" /></div>
+          <div class="field"><label>Inspector Assigned</label><input type="text" placeholder="Inspector name" /></div>
+          <div class="field"><label>Roof Pitch</label><input type="text" placeholder="e.g. 15°, Low / Medium / Steep" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="sec-title">Reported Issue Overview</div>
+      <div class="sec"><textarea class="box" rows="4" placeholder="Describe the reported issues as communicated by the client..."></textarea></div>
+    </div>
+
+    <div class="section-block">
+      <div class="sec-title">Observed &amp; Reported Internal Damage</div>
+      <div class="sec"><textarea class="box" rows="4" placeholder="Document any internal damage observed or reported..."></textarea></div>
+    </div>
+
+    <div class="section-block">
+      <div class="sec-title">Roofing Condition Assessment – Pitch and Structural Observations</div>
+      <div class="sec"><textarea class="box" rows="4" placeholder="Describe overall roofing condition, pitch integrity, structural soundness, flashing, gutters, ridge capping, valleys..."></textarea></div>
+    </div>
+
+    <div class="section-block">
+      <div class="sec-title">Damage Attribution – Maintenance vs Storm Impact</div>
+      <div class="two-col">
+        <div>
+          <div class="col-head">Maintenance Related Issues</div>
+          <textarea class="box" rows="4" placeholder="List maintenance-related issues observed..."></textarea>
+        </div>
+        <div>
+          <div class="col-head">Storm Damage</div>
+          <textarea class="box" rows="4" placeholder="List storm-related damage observed..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="sec-title">Recommendations</div>
+      <div class="sec"><textarea class="box" rows="4" placeholder="List recommended repairs, replacements, or further investigations..."></textarea></div>
+    </div>
+
+    <div class="section-block" style="padding-bottom:14px;">
+      <div class="sec-title">Make Safe Completed</div>
+      <div class="sec"><textarea class="box" rows="4" placeholder="Describe make safe works completed on site..."></textarea></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- PAGE 2: First 6 Photos -->
+<div class="page photos-page">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-box" style="border-color:#2a3f6a; background:#2a3f6a;">
+        <img id="logoImg2" src="" style="display:none;" />
+        <span id="logoText2" style="color:#4a6aaa; font-size:8px;">Logo</span>
+      </div>
+      <div class="co-name">ZENITH ROOFING</div>
+      <div class="co-sub">Roof Restoration and Replacements</div>
+    </div>
+    <div class="header-center">
+      <div class="rpt-title">Inspection Photos</div>
+    </div>
+    <div class="header-right">
+      <p><strong style="color:#fff;">ABN:</strong> 26 671 651 915</p>
+      <p><strong style="color:#fff;">Email:</strong> info@zenithroofingsydney.com.au</p>
+      <p><strong style="color:#fff;">Phone:</strong> (02) 7256 4796</p>
+    </div>
+  </div>
+  <div class="photos-grid" id="photosGrid1"></div>
+</div>
+
+<!-- PAGE 3: Remaining 4 Photos -->
+<div class="page photos-page">
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-box" style="border-color:#2a3f6a; background:#2a3f6a;">
+        <img id="logoImg3" src="" style="display:none;" />
+        <span id="logoText3" style="color:#4a6aaa; font-size:8px;">Logo</span>
+      </div>
+      <div class="co-name">ZENITH ROOFING</div>
+      <div class="co-sub">Roof Restoration and Replacements</div>
+    </div>
+    <div class="header-center">
+      <div class="rpt-title">Inspection Photos (Continued)</div>
+    </div>
+    <div class="header-right">
+      <p><strong style="color:#fff;">ABN:</strong> 26 671 651 915</p>
+      <p><strong style="color:#fff;">Email:</strong> info@zenithroofingsydney.com.au</p>
+      <p><strong style="color:#fff;">Phone:</strong> (02) 7256 4796</p>
+    </div>
+  </div>
+  <div class="photos-grid" id="photosGrid2"></div>
+</div>
+
+<script>
+function loadLogo(e) {
+  var f = e.target.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function(ev) {
+    var src = ev.target.result;
+    ['logoImg','logoImg2','logoImg3'].forEach(function(id) {
+      var img = document.getElementById(id);
+      img.src = src; img.style.display = 'block';
+    });
+    ['logoText','logoText2','logoText3'].forEach(function(id) {
+      document.getElementById(id).style.display = 'none';
+    });
+  };
+  r.readAsDataURL(f);
+}
+
+function makePhotoBox(num) {
+  var box = document.createElement('div');
+  box.className = 'photo-box';
+  box.innerHTML = '<div class="photo-icon">+</div><span>Photo ' + num + '</span>';
+  box.addEventListener('click', (function(b) {
+    return function() {
+      var inp = document.createElement('input');
+      inp.type = 'file'; inp.accept = 'image/*';
+      inp.onchange = function(ev) {
+        var f = ev.target.files[0]; if (!f) return;
+        var r = new FileReader();
+        r.onload = function(e2) {
+          b.querySelectorAll('div,span').forEach(function(el){ el.style.display='none'; });
+          var im = b.querySelector('img') || document.createElement('img');
+          im.src = e2.target.result;
+          if (!b.querySelector('img')) b.insertBefore(im, b.firstChild);
+          im.style.display = 'block';
+        };
+        r.readAsDataURL(f);
+      };
+      inp.click();
+    };
+  })(box));
+  return box;
+}
+
+var g1 = document.getElementById('photosGrid1');
+for (var i = 1; i <= 6; i++) g1.appendChild(makePhotoBox(i));
+
+var g2 = document.getElementById('photosGrid2');
+for (var j = 7; j <= 10; j++) g2.appendChild(makePhotoBox(j));
+</script>
+</body>
+</html>
